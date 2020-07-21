@@ -17,7 +17,7 @@ const Index = () => {
   };
   console.log(process.env);
   return (
-    <div className="h-screen grid grid-flow-row grid-cols-2 grid-rows-6">
+    <div className="h-screen grid grid-flow-col grid-cols-2 grid-rows-6">
       <div
         className="col-span-1 row-span-6 flex items-center justify-center"
         style={{
