@@ -3,11 +3,12 @@ import "../../styles/app.css";
 import SettingsIcon from "@material-ui/icons/Settings";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 const Topbar: React.FC<{}> = () => {
   return (
-    <div className="flex-none h-32  bg-blue-700 flex justify-between items-center">
+    <div className="flex-none  h-24  bg-blue-700 flex justify-between items-center">
       <div className="flex items-center justify-center">
-        <SettingsIcon
+        <ExitToAppIcon
           className="mx-3 text-white"
           style={{ height: 50, width: 50 }}
         />
@@ -16,6 +17,10 @@ const Topbar: React.FC<{}> = () => {
           style={{ height: 50, width: 50 }}
         />
         <FavoriteIcon
+          className="mx-3 text-white"
+          style={{ height: 50, width: 50 }}
+        />
+        <SettingsIcon
           className="mx-3 text-white"
           style={{ height: 50, width: 50 }}
         />

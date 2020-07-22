@@ -4,7 +4,8 @@ import InputRow from "../components/InputRow";
 import axios from "axios";
 import ErrorIcon from "@material-ui/icons/Error";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
-const Login: React.FC<{}> = ({}) => {
+import Cookies from "js-cookie";
+const Login: React.FC<{ history: any }> = ({ history }) => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [msgType, setMsgType] = useState<number>(0);
@@ -42,8 +43,16 @@ const Login: React.FC<{}> = ({}) => {
       }
     );
     console.log(data);
-    setMsgContent(data.content);
-    setMsgType(data.type);
+    if (data.type == 2) {
+      setMsgContent(data.content);
+      setMsgType(data.type);
+    }
+    if (data.type == 1) {
+      Cookies.set("token", data.content[0]);
+      history.push({
+        pathname: "/dashboard",
+      });
+    }
   };
   return (
     <div>

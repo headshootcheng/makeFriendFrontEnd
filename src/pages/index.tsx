@@ -3,14 +3,14 @@ import "../styles/app.css";
 import { ButtonGroup, Button, Link } from "@material-ui/core";
 import Register from "./register";
 import Login from "./login";
-const Index = () => {
+const Index: React.FC<{ history: any }> = ({ history }) => {
   const [type, setType] = useState<string>("register");
-  const renderPage: React.FC<{}> = () => {
+  const renderPage: React.FC<{ history: any }> = ({ history }) => {
     switch (type) {
       case "register":
         return <Register />;
       case "login":
-        return <Login />;
+        return <Login history={history} />;
       default:
         return <Register />;
     }
@@ -52,7 +52,7 @@ const Index = () => {
           </Button>
         </ButtonGroup>
       </div>
-      <div className="row-span-4 col-span-1">{renderPage({})}</div>
+      <div className="row-span-4 col-span-1">{renderPage({ history })}</div>
       <div className="row-span-1 col-span-1 flex items-center justify-center">
         <Link className="text-2xl font-bold text-blue-700">
           Forgot Password?
