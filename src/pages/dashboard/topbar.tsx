@@ -4,7 +4,7 @@ import SettingsIcon from "@material-ui/icons/Settings";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-const Topbar: React.FC<{}> = () => {
+const Topbar: React.FC<{ username: string }> = ({ username }) => {
   return (
     <div className="flex-none  h-24  bg-blue-700 flex justify-between items-center">
       <div className="flex items-center justify-center">
@@ -32,7 +32,7 @@ const Topbar: React.FC<{}> = () => {
         FriendChat
       </span>
       <div className="flex flex-row items-center justify-center">
-        <span className="text-3xl mx-3 text-white"> headshoot </span>
+        <span className="text-3xl mx-3 text-white"> {username}</span>
         <img
           src={require("../../images/userIcon.png")}
           className="h-16 w-16 object-contain rounded-full mx-3"
