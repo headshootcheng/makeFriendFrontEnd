@@ -5,7 +5,9 @@ import axios from "axios";
 import ErrorIcon from "@material-ui/icons/Error";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import Cookies from "js-cookie";
-const Login: React.FC<{ history: any }> = ({ history }) => {
+import { useHistory } from "react-router-dom";
+const Login: React.FC<{}> = ({}) => {
+  const history = useHistory();
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [msgType, setMsgType] = useState<number>(0);
@@ -49,11 +51,10 @@ const Login: React.FC<{ history: any }> = ({ history }) => {
     }
     if (data.type == 1) {
       Cookies.set("token", data.content[0]);
-      history.push({
-        pathname: "/dashboard",
-      });
+      history.push("/dashboard");
     }
   };
+
   return (
     <div>
       {msgContent.map((content) => {

@@ -23,7 +23,7 @@ const Register: React.FC<{}> = ({}) => {
         confirmedPassword: confirmedPassword,
       }
     );
-    console.log(data);
+    // console.log(data);
     setMsgContent(data.content);
     setMsgType(data.type);
   };
