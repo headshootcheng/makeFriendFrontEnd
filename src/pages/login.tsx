@@ -11,8 +11,8 @@ const Login: React.FC<{}> = ({}) => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [msgType, setMsgType] = useState<number>(0);
-  const [msgContent, setMsgContent] = useState<string[]>([]);
-  const msgBox: React.FC<{ content: string }> = (content) => {
+  const [msgContent, setMsgContent] = useState<string>("");
+  const msgBox: React.FC<{}> = ({}) => {
     switch (msgType) {
       case 0:
         return <div className="h-12" />;
@@ -20,14 +20,14 @@ const Login: React.FC<{}> = ({}) => {
         return (
           <div className="w-full bg-green-500 flex items-center flex-row px-4 py-2">
             <CheckCircleIcon className=" text-white" />
-            <span className="text-white mx-2 text-xl">{content.content}</span>
+            <span className="text-white mx-2 text-xl">{msgContent}</span>
           </div>
         );
       case 2:
         return (
           <div className="w-full  bg-red-600 flex items-center flex-row px-4 py-2">
             <ErrorIcon className=" text-white" />
-            <span className="text-white mx-2 text-xl">{content.content}</span>
+            <span className="text-white mx-2 text-xl">{msgContent}</span>
           </div>
         );
       default:
@@ -38,28 +38,26 @@ const Login: React.FC<{}> = ({}) => {
     event.preventDefault();
 
     const { data } = await axios.post(
-      `${process.env.REACT_APP_API_URL}/login`,
+      `${process.env.REACT_APP_API_URL}/auth/login`,
       {
         username: username,
         password: password,
       }
     );
     console.log(data);
-    if (data.type == 2) {
-      setMsgContent(data.content);
-      setMsgType(data.type);
+    if (data.message) {
+      setMsgType(2);
+      setMsgContent(data.message);
     }
-    if (data.type == 1) {
-      Cookies.set("token", data.content[0]);
+    if (data.token) {
+      localStorage.setItem("auth", data.token);
       history.push("/dashboard");
     }
   };
 
   return (
     <div>
-      {msgContent.map((content) => {
-        return msgBox({ content });
-      })}
+      {msgBox({})}
       <form className="mx-24" onSubmit={submitData}>
         <span className="text-5xl font-bold">Login</span>
         <InputRow

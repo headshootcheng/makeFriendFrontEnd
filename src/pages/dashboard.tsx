@@ -25,13 +25,13 @@ const Dashboard = () => {
     setLogin(data.login);
   };
   return (
-    <div className="flex flex-col h-screen">
-      <Topbar username={username} />
-      <div className="flex-1 grid grid-rows-5  grid-cols-3 grid-flow-col h-64">
+    <div className="flex flex-row h-screen">
+      <div className="flex-none w-1/3 flex-1 flex flex-col ">
+        <Topbar username="admin" />
         <Searchbar />
         <Contactlist />
-        <Content />
       </div>
+      <Content />
     </div>
   );
 };

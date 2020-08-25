@@ -3,7 +3,7 @@ import "../../styles/app.css";
 const Content: React.FC<{}> = () => {
   return (
     <div
-      className="col-span-2 row-span-5 bg-white"
+      className="flex-1  bg-white"
       style={{
         backgroundImage: `url(${require("../../images/wrapper.jpeg")})`,
         backgroundSize: "contain",

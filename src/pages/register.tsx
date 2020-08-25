@@ -11,11 +11,12 @@ const Register: React.FC<{}> = ({}) => {
   const [confirmedPassword, setConfirmedPassword] = useState<string>("");
   const [msgType, setMsgType] = useState<number>(0);
   const [msgContent, setMsgContent] = useState<string[]>([]);
+
   const submitData: (event: any) => void = async (event) => {
     event.preventDefault();
 
     const { data } = await axios.post(
-      `${process.env.REACT_APP_API_URL}/register`,
+      `${process.env.REACT_APP_API_URL}/auth/register`,
       {
         username: username,
         email: email,
@@ -23,7 +24,7 @@ const Register: React.FC<{}> = ({}) => {
         confirmedPassword: confirmedPassword,
       }
     );
-    // console.log(data);
+    console.log(data);
     setMsgContent(data.content);
     setMsgType(data.type);
   };

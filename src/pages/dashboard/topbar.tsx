@@ -1,45 +1,186 @@
 import React from "react";
-import "../../styles/app.css";
-import SettingsIcon from "@material-ui/icons/Settings";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import {
+  fade,
+  makeStyles,
+  Theme,
+  createStyles,
+} from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+import InputBase from "@material-ui/core/InputBase";
+import Badge from "@material-ui/core/Badge";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import MenuIcon from "@material-ui/icons/Menu";
+import SearchIcon from "@material-ui/icons/Search";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import MoreIcon from "@material-ui/icons/MoreVert";
+import AccountPopUp from "./accountPopUp";
+import AccountPopUpMobile from "./accountPopUpMobile";
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    wrapper: {
+      height: 56,
+      [theme.breakpoints.up("md")]: {
+        height: 64,
+      },
+    },
+    grow: {
+      flexGrow: 1,
+    },
+    menuButton: {
+      marginRight: theme.spacing(1),
+    },
+    title: {
+      display: "none",
+      [theme.breakpoints.up("sm")]: {
+        display: "block",
+      },
+    },
+    search: {
+      position: "relative",
+      borderRadius: theme.shape.borderRadius,
+      backgroundColor: fade(theme.palette.common.white, 0.15),
+      "&:hover": {
+        backgroundColor: fade(theme.palette.common.white, 0.25),
+      },
+      marginRight: theme.spacing(2),
+      marginLeft: 0,
+      width: "100%",
+      [theme.breakpoints.up("sm")]: {
+        marginLeft: theme.spacing(3),
+        width: 400,
+      },
+    },
+    searchIcon: {
+      padding: theme.spacing(0, 2),
+      height: "100%",
+      position: "absolute",
+      pointerEvents: "none",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    inputRoot: {
+      color: "inherit",
+    },
+    inputInput: {
+      padding: theme.spacing(1, 1, 1, 0),
+      // vertical padding + font size from searchIcon
+      paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+      transition: theme.transitions.create("width"),
+      width: "100%",
+      [theme.breakpoints.up("md")]: {
+        width: "20ch",
+      },
+    },
+    sectionDesktop: {
+      display: "none",
+      [theme.breakpoints.up("md")]: {
+        display: "flex",
+      },
+      alignItems: "center",
+    },
+    sectionMobile: {
+      display: "flex",
+      [theme.breakpoints.up("md")]: {
+        display: "none",
+      },
+    },
+    titleArea: {
+      display: "none",
+      [theme.breakpoints.up("md")]: {
+        display: "flex",
+        marginLeft: 100,
+      },
+    },
+  })
+);
+
 const Topbar: React.FC<{ username: string }> = ({ username }) => {
+  const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [
+    mobileMoreAnchorEl,
+    setMobileMoreAnchorEl,
+  ] = React.useState<null | HTMLElement>(null);
+
+  const isMenuOpen = Boolean(anchorEl);
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMobileMenuClose = () => {
+    setMobileMoreAnchorEl(null);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  };
+
+  const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setMobileMoreAnchorEl(event.currentTarget);
+  };
+
+  const menuId = "primary-search-account-menu";
+
+  const mobileMenuId = "primary-search-account-menu-mobile";
+
   return (
-    <div className="flex-none  h-24  bg-blue-700 flex justify-between items-center">
-      <div className="flex items-center justify-center">
-        <ExitToAppIcon
-          className="mx-3 text-white"
-          style={{ height: 50, width: 50 }}
-        />
-        <AddCircleIcon
-          className="mx-3 text-white"
-          style={{ height: 50, width: 50 }}
-        />
-        <FavoriteIcon
-          className="mx-3 text-white"
-          style={{ height: 50, width: 50 }}
-        />
-        <SettingsIcon
-          className="mx-3 text-white"
-          style={{ height: 50, width: 50 }}
-        />
-      </div>
-      <span
-        className="text-5xl text-white"
-        style={{ fontFamily: "Indie Flower" }}
-      >
-        FriendChat
-      </span>
-      <div className="flex flex-row items-center justify-center">
-        <span className="text-3xl mx-3 text-white"> {username}</span>
-        <img
-          src={require("../../images/userIcon.png")}
-          className="h-16 w-16 object-contain rounded-full mx-3"
-        />
-      </div>
+    <div className={classes.wrapper}>
+      <AppBar position="static" color="default">
+        <Toolbar className=" h-full">
+          <span
+            className=" text-2xl text-black"
+            style={{ fontFamily: "Indie Flower" }}
+          >
+            FriendChat
+          </span>
+
+          <div className={classes.grow} />
+          <div className={classes.sectionDesktop}>
+            <Typography className={classes.title} variant="h6" noWrap>
+              Admin
+            </Typography>
+            <IconButton
+              edge="end"
+              aria-controls={menuId}
+              onClick={handleProfileMenuOpen}
+              color="inherit"
+              style={{ outline: "none" }}
+            >
+              <AccountCircle />
+            </IconButton>
+          </div>
+          <div className={classes.sectionMobile}>
+            <IconButton
+              aria-controls={mobileMenuId}
+              onClick={handleMobileMenuOpen}
+              color="inherit"
+              style={{ outline: "none" }}
+            >
+              <MoreIcon />
+            </IconButton>
+          </div>
+        </Toolbar>
+      </AppBar>
+      <AccountPopUp
+        anchorEl={anchorEl}
+        menuId={menuId}
+        isMenuOpen={isMenuOpen}
+        handleMenuClose={handleMenuClose}
+      />
+      <AccountPopUpMobile
+        mobileMoreAnchorEl={mobileMoreAnchorEl}
+        mobileMenuId={mobileMenuId}
+        isMobileMenuOpen={isMobileMenuOpen}
+        handleMobileMenuClose={handleMobileMenuClose}
+      />
     </div>
   );
 };
-
 export default Topbar;
