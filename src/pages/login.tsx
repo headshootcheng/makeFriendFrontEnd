@@ -4,7 +4,6 @@ import InputRow from "../components/InputRow";
 import axios from "axios";
 import ErrorIcon from "@material-ui/icons/Error";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
-import Cookies from "js-cookie";
 import { useHistory } from "react-router-dom";
 const Login: React.FC<{}> = ({}) => {
   const history = useHistory();
@@ -44,7 +43,7 @@ const Login: React.FC<{}> = ({}) => {
         password: password,
       }
     );
-    console.log(data);
+    //console.log(data);
     if (data.message) {
       setMsgType(2);
       setMsgContent(data.message);

@@ -17,9 +17,9 @@ const Index: React.FC<{}> = ({}) => {
   };
   //console.log(process.env);
   return (
-    <div className="h-screen grid grid-flow-col grid-cols-2 grid-rows-6">
+    <div className="h-screen grid grid-flow-col grid-cols-1 md:grid-cols-2  grid-rows-6">
       <div
-        className="col-span-1 row-span-6 flex items-center justify-center"
+        className="hidden md:col-span-1 md:row-span-6 md:flex items-center justify-center"
         style={{
           backgroundImage: `url(${require("../images/indexBackground.jpg")})`,
         }}
