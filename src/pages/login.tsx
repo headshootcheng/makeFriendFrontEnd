@@ -57,13 +57,21 @@ const Login: React.FC<{}> = ({}) => {
     }
   };
 
-  const googleLogin = (response: any) => {
+  const googleLogin = async (response: any) => {
     console.log(response);
     console.log(response.profileObj);
-    // const { data } = await axios.post(
-    //   `${process.env.REACT_APP_API_URL}/auth/google`,
-    //   {}
-    // );
+    const { givenName, email } = response.profileObj;
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_API_URL}/auth/google`,
+      {
+        username: givenName,
+        email: email,
+      }
+    );
+    if (data.token) {
+      localStorage.setItem("auth", data.token);
+      history.push("/dashboard");
+    }
   };
 
   return (

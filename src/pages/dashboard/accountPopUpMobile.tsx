@@ -6,6 +6,8 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import LockIcon from "@material-ui/icons/Lock";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import CreditCardIcon from "@material-ui/icons/CreditCard";
+import { useHistory } from "react-router-dom";
+
 const AccountPopUpMobile: React.FC<{
   mobileMoreAnchorEl: any;
   mobileMenuId: string;
@@ -17,6 +19,12 @@ const AccountPopUpMobile: React.FC<{
   isMobileMenuOpen,
   handleMobileMenuClose,
 }) => {
+  const history = useHistory();
+
+  const logOut = () => {
+    localStorage.removeItem("auth");
+    history.push("/");
+  };
   return (
     <Menu
       anchorEl={mobileMoreAnchorEl}
@@ -56,6 +64,7 @@ const AccountPopUpMobile: React.FC<{
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
           color="inherit"
+          onClick={logOut}
         >
           <ExitToAppIcon />
         </IconButton>
