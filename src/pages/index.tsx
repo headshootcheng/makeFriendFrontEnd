@@ -4,7 +4,7 @@ import { ButtonGroup, Button, Link } from "@material-ui/core";
 import Register from "./register";
 import Login from "./login";
 const Index: React.FC<{}> = ({}) => {
-  const [type, setType] = useState<string>("register");
+  const [type, setType] = useState<string>("login");
   const renderPage: React.FC<{}> = ({}) => {
     switch (type) {
       case "register":

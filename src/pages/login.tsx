@@ -5,6 +5,9 @@ import axios from "axios";
 import ErrorIcon from "@material-ui/icons/Error";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import { useHistory } from "react-router-dom";
+//import FacebookLogin from "react-facebook-login";
+import GoogleLogin from "react-google-login";
+
 const Login: React.FC<{}> = ({}) => {
   const history = useHistory();
   const [username, setUsername] = useState<string>("");
@@ -43,7 +46,7 @@ const Login: React.FC<{}> = ({}) => {
         password: password,
       }
     );
-    //console.log(data);
+    console.log(data);
     if (data.message) {
       setMsgType(2);
       setMsgContent(data.message);
@@ -52,6 +55,15 @@ const Login: React.FC<{}> = ({}) => {
       localStorage.setItem("auth", data.token);
       history.push("/dashboard");
     }
+  };
+
+  const googleLogin = (response: any) => {
+    console.log(response);
+    console.log(response.profileObj);
+    // const { data } = await axios.post(
+    //   `${process.env.REACT_APP_API_URL}/auth/google`,
+    //   {}
+    // );
   };
 
   return (
@@ -77,7 +89,7 @@ const Login: React.FC<{}> = ({}) => {
           }}
           required
         />
-        <div className="mt-8 flex items-center justify-center">
+        <div className="mt-8 flex items-center justify-center flex-col  r">
           <Button
             variant="contained"
             className="h-20 w-64"
@@ -86,6 +98,24 @@ const Login: React.FC<{}> = ({}) => {
           >
             Sign In
           </Button>
+          <GoogleLogin
+            clientId={process.env.REACT_APP_GOOGLE_ID || ""}
+            buttonText="Login with Google"
+            className="h-10 w-64 mt-5  justify-center"
+            onSuccess={googleLogin}
+            onFailure={googleLogin}
+          />
+          {/* <a href="http://127.0.0.1:8080/auth/google">
+            <Button>google</Button>
+          </a> */}
+
+          {/* <FacebookLogin
+            appId="2222"
+            textButton=" Login with Facebook"
+            icon="fa-facebook"
+            cssClass="h-10 w-64 mt-5 bg-blue-700 text-white rounded-sm "
+            callback={() => {}}
+          /> */}
         </div>
       </form>
     </div>
