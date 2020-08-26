@@ -5,7 +5,7 @@ import axios from "axios";
 import ErrorIcon from "@material-ui/icons/Error";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import { useHistory } from "react-router-dom";
-//import FacebookLogin from "react-facebook-login";
+import FacebookLogin from "react-facebook-login";
 import GoogleLogin from "react-google-login";
 
 const Login: React.FC<{}> = ({}) => {
@@ -73,6 +73,9 @@ const Login: React.FC<{}> = ({}) => {
       history.push("/dashboard");
     }
   };
+  const facebookLogin = (response: any) => {
+    console.log(response);
+  };
 
   return (
     <div>
@@ -117,13 +120,15 @@ const Login: React.FC<{}> = ({}) => {
             <Button>google</Button>
           </a> */}
 
-          {/* <FacebookLogin
-            appId="2222"
+          <FacebookLogin
+            appId={process.env.REACT_APP_FACEBOOK_ID || ""}
             textButton=" Login with Facebook"
             icon="fa-facebook"
             cssClass="h-10 w-64 mt-5 bg-blue-700 text-white rounded-sm "
-            callback={() => {}}
-          /> */}
+            fields="name,email"
+            onClick={() => {}}
+            callback={facebookLogin}
+          />
         </div>
       </form>
     </div>
