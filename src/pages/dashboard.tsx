@@ -5,25 +5,28 @@ import Searchbar from "./dashboard/searchbar";
 import Contactlist from "./dashboard/contactlist";
 import Content from "./dashboard/content";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
+
 const Dashboard = () => {
   const [username, setUsername] = useState<string>("");
-  const [login, setLogin] = useState<boolean>(false);
+  const history = useHistory();
 
   useEffect(() => {
     getUserInfo();
   }, []);
 
-  const getUserInfo: () => void = async () => {
-    const { data } = await axios.get(
-      `${process.env.REACT_APP_API_URL}/user/userInfo`,
-      {
+  const getUserInfo: () => void = () => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/user/userInfo`, {
         headers: { Authorization: "Bearer " + localStorage.getItem("auth") },
-      }
-    );
-    if (data) {
-      setUsername(data.username);
-      setLogin(true);
-    }
+      })
+      .then(({ data }) => {
+        setUsername(data.username);
+      })
+      .catch((err) => {
+        //console.log(err);
+        history.push("/");
+      });
   };
 
   return (
