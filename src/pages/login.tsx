@@ -62,7 +62,7 @@ const Login: React.FC<{}> = ({}) => {
     console.log(response.profileObj);
     const { givenName, email } = response.profileObj;
     const { data } = await axios.post(
-      `${process.env.REACT_APP_API_URL}/auth/google`,
+      `${process.env.REACT_APP_API_URL}/auth/thirdParty`,
       {
         username: givenName,
         email: email,
@@ -73,8 +73,21 @@ const Login: React.FC<{}> = ({}) => {
       history.push("/dashboard");
     }
   };
-  const facebookLogin = (response: any) => {
+
+  const facebookLogin = async (response: any) => {
     console.log(response);
+    const { name, email } = response;
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_API_URL}/auth/thirdParty`,
+      {
+        username: name,
+        email: email,
+      }
+    );
+    if (data.token) {
+      localStorage.setItem("auth", data.token);
+      history.push("/dashboard");
+    }
   };
 
   return (
