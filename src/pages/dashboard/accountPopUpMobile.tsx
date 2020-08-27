@@ -58,13 +58,12 @@ const AccountPopUpMobile: React.FC<{
         <p>Reset Password</p>
       </MenuItem>
 
-      <MenuItem>
+      <MenuItem onClick={logOut}>
         <IconButton
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
           color="inherit"
-          onClick={logOut}
         >
           <ExitToAppIcon />
         </IconButton>
