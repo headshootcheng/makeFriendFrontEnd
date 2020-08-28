@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
 import "../styles/app.css";
-import Topbar from "./dashboard/topbar";
-import Searchbar from "./dashboard/searchbar";
-import Contactlist from "./dashboard/contactlist";
-import Content from "./dashboard/content";
+import Topbar from "../components/dashboard/topbar";
+import Searchbar from "../components/dashboard/searchbar";
+import RoomList from "../components/chatroom/roomList";
+import Content from "../components/dashboard/content";
+import Chatroom from "./chatroom";
+import AddChatRoomPopUp from "../components/chatroom/addChatRoomPopUp";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
 const Dashboard = () => {
   const [username, setUsername] = useState<string>("");
   const history = useHistory();
+  const [addChatOpen, setAddChatOpen] = useState<boolean>(false);
+  const [switchRoomPage, setSwitch] = useState<boolean>(false);
 
   useEffect(() => {
     getUserInfo();
@@ -31,15 +35,29 @@ const Dashboard = () => {
 
   return (
     <div className="flex flex-row h-screen">
-      <div className=" flex-1 md:flex-none md:w-1/3 flex flex-col ">
+      <div
+        className={`flex-1 md:flex-none md:w-1/3  flex-col ${
+          switchRoomPage ? "hidden" : "flex"
+        } md:flex`}
+      >
         <Topbar username={username} />
-        <Searchbar />
-        <Contactlist />
+        <Searchbar handleOpen={() => setAddChatOpen(true)} />
+        <RoomList switchToRoom={() => setSwitch(true)} />
+        <AddChatRoomPopUp
+          open={addChatOpen}
+          handleClose={() => setAddChatOpen(false)}
+        />
       </div>
-      <Content />
+      {switchRoomPage ? (
+        <Chatroom
+          switchRoomPage={switchRoomPage}
+          switchToMenu={() => setSwitch(false)}
+        />
+      ) : (
+        <Content />
+      )}
     </div>
   );
 };
 
 export default Dashboard;
-// Bearer

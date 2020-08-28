@@ -1,10 +1,8 @@
 import React from "react";
 import "../../styles/app.css";
 import AppBar from "@material-ui/core/AppBar";
-
+import Toolbar from "@material-ui/core/Toolbar";
 import SearchIcon from "@material-ui/icons/Search";
-import TextField from "@material-ui/core/TextField";
-import InputAdornment from "@material-ui/core/InputAdornment";
 import {
   fade,
   makeStyles,
@@ -12,6 +10,9 @@ import {
   createStyles,
 } from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
+import IconButton from "@material-ui/core/IconButton";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     search: {
@@ -37,7 +38,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     inputInput: {
       padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
       paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
       transition: theme.transitions.create("width"),
       width: "100%",
@@ -48,15 +48,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const Searchbar: React.FC<{}> = () => {
+const Searchbar: React.FC<{ handleOpen: () => void }> = ({ handleOpen }) => {
   const classes = useStyles();
   return (
-    <div className="flex-none h-20">
-      <AppBar
-        position="sticky"
-        color="primary"
-        className="h-full flex items-center justify-center"
-      >
+    <AppBar position="sticky" color="primary" className="h-20 py-2">
+      <Toolbar className=" flex item-center">
         <div className={classes.search}>
           <div className={classes.searchIcon}>
             <SearchIcon />
@@ -70,8 +66,15 @@ const Searchbar: React.FC<{}> = () => {
             inputProps={{ "aria-label": "search" }}
           />
         </div>
-      </AppBar>
-    </div>
+        <div className="flex-1" />
+        <IconButton style={{ outline: "none" }} onClick={handleOpen}>
+          <AddCircleIcon
+            className=" text-white"
+            style={{ height: 30, width: 30 }}
+          />
+        </IconButton>
+      </Toolbar>
+    </AppBar>
   );
 };
 export default Searchbar;

@@ -28,8 +28,8 @@ const useStyles = makeStyles((theme: Theme) =>
       marginRight: theme.spacing(1),
     },
     title: {
-      display: "none",
-      [theme.breakpoints.up("sm")]: {
+      display: "block",
+      [theme.breakpoints.up("md")]: {
         display: "block",
       },
     },
@@ -79,9 +79,11 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     sectionMobile: {
       display: "flex",
+      paddingRight: 5,
       [theme.breakpoints.up("md")]: {
         display: "none",
       },
+      alignItems: "center",
     },
     titleArea: {
       display: "none",
@@ -128,7 +130,7 @@ const Topbar: React.FC<{ username: string }> = ({ username }) => {
   return (
     <div className={classes.wrapper}>
       <AppBar position="static" color="default">
-        <Toolbar className=" h-full">
+        <Toolbar>
           <span
             className=" text-2xl text-black"
             style={{ fontFamily: "Indie Flower" }}
@@ -152,6 +154,9 @@ const Topbar: React.FC<{ username: string }> = ({ username }) => {
             </IconButton>
           </div>
           <div className={classes.sectionMobile}>
+            <Typography className={classes.title} variant="h6" noWrap>
+              {username}
+            </Typography>
             <IconButton
               aria-controls={mobileMenuId}
               onClick={handleMobileMenuOpen}

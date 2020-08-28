@@ -1,6 +1,6 @@
 import React from "react";
 import { TextField } from "@material-ui/core";
-import "../styles/app.css";
+import "../../styles/app.css";
 const InputRow: React.FC<{
   label: string;
   placeholder: string;
