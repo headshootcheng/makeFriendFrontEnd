@@ -8,9 +8,6 @@ import Chatroom from "./chatroom";
 import AddChatRoomPopUp from "../components/chatroom/addChatRoomPopUp";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import { Provider } from "react-redux";
-import RoomApp from "../reducer";
-import { createStore } from "redux";
 
 const Dashboard = () => {
   const [username, setUsername] = useState<string>("");
@@ -20,6 +17,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     getUserInfo();
+    console.log("refresh");
   }, []);
 
   const getUserInfo: () => void = () => {
@@ -35,34 +33,31 @@ const Dashboard = () => {
         history.push("/");
       });
   };
-  const store: any = createStore(RoomApp, {});
 
   return (
-    <Provider store={store}>
-      <div className="flex flex-row h-screen">
-        <div
-          className={`flex-1 md:flex-none md:w-1/3  flex-col ${
-            switchRoomPage ? "hidden" : "flex"
-          } md:flex`}
-        >
-          <Topbar username={username} />
-          <Searchbar handleOpen={() => setAddChatOpen(true)} />
-          <RoomList switchToRoom={() => setSwitch(true)} />
-          <AddChatRoomPopUp
-            open={addChatOpen}
-            handleClose={() => setAddChatOpen(false)}
-          />
-        </div>
-        {switchRoomPage ? (
-          <Chatroom
-            switchRoomPage={switchRoomPage}
-            switchToMenu={() => setSwitch(false)}
-          />
-        ) : (
-          <Content />
-        )}
+    <div className="flex flex-row h-screen">
+      <div
+        className={`flex-1 md:flex-none md:w-1/3  flex-col ${
+          switchRoomPage ? "hidden" : "flex"
+        } md:flex`}
+      >
+        <Topbar username={username} />
+        <Searchbar handleOpen={() => setAddChatOpen(true)} />
+        <RoomList switchToRoom={() => setSwitch(true)} />
+        <AddChatRoomPopUp
+          open={addChatOpen}
+          handleClose={() => setAddChatOpen(false)}
+        />
       </div>
-    </Provider>
+      {switchRoomPage ? (
+        <Chatroom
+          switchRoomPage={switchRoomPage}
+          switchToMenu={() => setSwitch(false)}
+        />
+      ) : (
+        <Content />
+      )}
+    </div>
   );
 };
 

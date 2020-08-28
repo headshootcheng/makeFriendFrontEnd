@@ -1,14 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import * as serviceWorker from "./serviceWorker";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Dashboard from "./pages/dashboard";
 import Index from "./pages";
+import { Provider } from "react-redux";
+import RoomApp from "./reducer";
+import { createStore } from "redux";
+const store: any = createStore(RoomApp, {});
+
 ReactDOM.render(
   <Router>
     <div>
       <Switch>
-        <Route path="/dashboard" component={Dashboard} />
+        <Provider store={store}>
+          <Route path="/dashboard" component={Dashboard} />
+        </Provider>
         <Route path="/" component={Index} />
       </Switch>
     </div>

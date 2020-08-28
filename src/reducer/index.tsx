@@ -5,7 +5,8 @@ interface action {
   content: string;
 }
 
-const roomInfo = (state = "", actions: action) => {
+const roomInfo = (state = "123", actions: action) => {
+  console.log(actions);
   switch (actions.type) {
     case "SET_ROOM_INFO": {
       return actions.content;
