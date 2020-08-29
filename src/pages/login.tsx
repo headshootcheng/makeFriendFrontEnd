@@ -46,7 +46,7 @@ const Login: React.FC<{}> = ({}) => {
         password: password,
       }
     );
-    console.log(data);
+    // console.log(data);
     if (data.message) {
       setMsgType(2);
       setMsgContent(data.message);
@@ -58,14 +58,15 @@ const Login: React.FC<{}> = ({}) => {
   };
 
   const googleLogin = async (response: any) => {
-    console.log(response);
-    console.log(response.profileObj);
+    // console.log(response);
+    console.log("Google login", response.profileObj);
     const { givenName, email } = response.profileObj;
     const { data } = await axios.post(
       `${process.env.REACT_APP_API_URL}/auth/thirdParty`,
       {
         username: givenName,
         email: email,
+        provider: "Google",
       }
     );
     if (data.token) {
@@ -75,13 +76,14 @@ const Login: React.FC<{}> = ({}) => {
   };
 
   const facebookLogin = async (response: any) => {
-    console.log(response);
+    console.log("Facebook Login", response);
     const { name, email } = response;
     const { data } = await axios.post(
       `${process.env.REACT_APP_API_URL}/auth/thirdParty`,
       {
         username: name,
         email: email,
+        provider: "Facebook",
       }
     );
     if (data.token) {

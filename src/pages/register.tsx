@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@material-ui/core";
 import InputRow from "../components/auth/InputRow";
 import axios from "axios";

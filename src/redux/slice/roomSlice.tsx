@@ -2,16 +2,18 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type roomState = {
   name: string;
+  owner: string;
 };
 
 const roomInfoSlice = createSlice({
   name: "roomInfo",
-  initialState: { name: "New Room" },
+  initialState: { name: "New Room", owner: "Guest" },
   reducers: {
-    setCurrentRoomName(room, action: PayloadAction<string>) {
+    setCurrentRoomName(room, action: PayloadAction<roomState>) {
       //console.log(action, room);
-      const { payload } = action;
-      room.name = payload;
+      const { name, owner } = action.payload;
+      room.name = name;
+      room.owner = owner;
       //return room;
     },
   },

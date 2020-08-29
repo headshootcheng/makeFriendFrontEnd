@@ -14,7 +14,7 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 import AccountPopUp from "./accountPopUp";
 import AccountPopUpMobile from "./accountPopUpMobile";
 import { useSelector } from "react-redux";
-import { RootState } from "../../reducer";
+import { RootState } from "../../redux";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     wrapper: {

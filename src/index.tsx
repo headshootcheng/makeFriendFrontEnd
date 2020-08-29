@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Dashboard from "./pages/dashboard";
 import Index from "./pages";
 import { Provider } from "react-redux";
-import rootReducer from "./reducer";
+import rootReducer from "./redux";
 import { configureStore } from "@reduxjs/toolkit";
 
 const store = configureStore({ reducer: rootReducer });
