@@ -5,7 +5,7 @@ import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
 import { useDispatch } from "react-redux";
-import { setCurrentRoomName } from "../../redux/slice/roomSlice";
+import { setCurrentRoomInfo } from "../../redux/slice/roomSlice";
 import { openChatMode } from "../../redux/slice/dashboardSlice";
 const ChatRoomCard: React.FC<{
   name: string;
@@ -13,7 +13,7 @@ const ChatRoomCard: React.FC<{
 }> = ({ name = "", owner = "" }) => {
   const dispatch = useDispatch();
   const enterRoom = () => {
-    dispatch(setCurrentRoomName({ name: name, owner: owner }));
+    dispatch(setCurrentRoomInfo({ name: name, owner: owner }));
     dispatch(openChatMode());
   };
 
