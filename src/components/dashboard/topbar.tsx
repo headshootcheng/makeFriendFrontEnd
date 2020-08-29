@@ -13,6 +13,8 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import AccountPopUp from "./accountPopUp";
 import AccountPopUpMobile from "./accountPopUpMobile";
+import { useSelector } from "react-redux";
+import { RootState } from "../../reducer";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     wrapper: {
@@ -95,7 +97,8 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const Topbar: React.FC<{ username: string }> = ({ username }) => {
+const Topbar: React.FC<{}> = ({}) => {
+  const { username } = useSelector((state: RootState) => state.userInfo);
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [

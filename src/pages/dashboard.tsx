@@ -8,16 +8,15 @@ import Chatroom from "./chatroom";
 import AddChatRoomPopUp from "../components/chatroom/addChatRoomPopUp";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { setUsername } from "../reducer/slice/userSlice";
 const Dashboard = () => {
-  const [username, setUsername] = useState<string>("");
   const history = useHistory();
+  const dispatch = useDispatch();
   const [addChatOpen, setAddChatOpen] = useState<boolean>(false);
   const [switchRoomPage, setSwitch] = useState<boolean>(false);
-
   useEffect(() => {
     getUserInfo();
-    console.log("refresh");
   }, []);
 
   const getUserInfo: () => void = () => {
@@ -26,7 +25,8 @@ const Dashboard = () => {
         headers: { Authorization: "Bearer " + localStorage.getItem("auth") },
       })
       .then(({ data }) => {
-        setUsername(data.username);
+        //setUsername(data.username);
+        dispatch(setUsername(data.username));
       })
       .catch((err) => {
         //console.log(err);
@@ -41,7 +41,7 @@ const Dashboard = () => {
           switchRoomPage ? "hidden" : "flex"
         } md:flex`}
       >
-        <Topbar username={username} />
+        <Topbar />
         <Searchbar handleOpen={() => setAddChatOpen(true)} />
         <RoomList switchToRoom={() => setSwitch(true)} />
         <AddChatRoomPopUp

@@ -4,16 +4,15 @@ import GroupRounded from "@material-ui/icons/GroupRounded";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
-import { connect } from "react-redux";
-import { setRoomInfo } from "../../action";
-
-const ChatRoomCardwithRedux: React.FC<{
+import { useDispatch } from "react-redux";
+import { setCurrentRoomName } from "../../reducer/slice/roomSlice";
+const ChatRoomCard: React.FC<{
   name: string;
   switchToRoom: () => void;
-  editRoomName: (input: string) => void;
-}> = ({ name = "", switchToRoom, editRoomName }) => {
+}> = ({ name = "", switchToRoom }) => {
+  const dispatch = useDispatch();
   const enterRoom = () => {
-    editRoomName(name);
+    dispatch(setCurrentRoomName(name));
     switchToRoom();
   };
 
@@ -48,15 +47,5 @@ const ChatRoomCardwithRedux: React.FC<{
     </div>
   );
 };
-
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    editRoomName: (input: string) => {
-      dispatch(setRoomInfo(input));
-    },
-  };
-};
-
-const ChatRoomCard = connect(null, mapDispatchToProps)(ChatRoomCardwithRedux);
 
 export default ChatRoomCard;

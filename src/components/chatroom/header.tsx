@@ -5,11 +5,12 @@ import "../../styles/app.css";
 import GroupRounded from "@material-ui/icons/GroupRounded";
 import IconButton from "@material-ui/core/IconButton";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
-import { connect } from "react-redux";
-const HeaderWithRedux: React.FC<{
+import { useSelector } from "react-redux";
+import { RootState } from "../../reducer";
+const Header: React.FC<{
   switchToMenu: () => void;
-  roomName: string;
-}> = ({ switchToMenu, roomName }) => {
+}> = ({ switchToMenu }) => {
+  const { name } = useSelector((state: RootState) => state.roomInfo);
   return (
     <AppBar position="static" color="default" className="h-24 py-4">
       <Toolbar className=" flex item-center">
@@ -24,17 +25,10 @@ const HeaderWithRedux: React.FC<{
           style={{ height: 50, width: 50 }}
           className="bg-black text-white rounded-full p-2"
         />
-        <span className="text-2xl mx-2">{roomName}</span>
+        <span className="text-2xl mx-2">{name}</span>
       </Toolbar>
     </AppBar>
   );
 };
-const mapStateToProps = (state: any) => {
-  console.log(state.roomInfo);
-  return {
-    roomName: state.roomInfo,
-  };
-};
 
-const Header = connect(mapStateToProps, null)(HeaderWithRedux);
 export default Header;

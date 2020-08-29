@@ -8,7 +8,7 @@ const Chatroom: React.FC<{
 }> = ({ switchRoomPage, switchToMenu }) => {
   return (
     <div className=" flex flex-1 flex-col">
-      <Header switchToMenu={switchToMenu} roomName="" />
+      <Header switchToMenu={switchToMenu} />
       <div className="flex-1 bg-yellow-800 overflow-auto"></div>
       <MessageBox />
     </div>

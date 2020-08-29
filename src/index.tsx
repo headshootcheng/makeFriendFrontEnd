@@ -5,21 +5,22 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Dashboard from "./pages/dashboard";
 import Index from "./pages";
 import { Provider } from "react-redux";
-import RoomApp from "./reducer";
-import { createStore } from "redux";
-const store: any = createStore(RoomApp, {});
+import rootReducer from "./reducer";
+import { configureStore } from "@reduxjs/toolkit";
+
+const store = configureStore({ reducer: rootReducer });
 
 ReactDOM.render(
-  <Router>
-    <div>
-      <Switch>
-        <Provider store={store}>
+  <Provider store={store}>
+    <Router>
+      <div>
+        <Switch>
           <Route path="/dashboard" component={Dashboard} />
-        </Provider>
-        <Route path="/" component={Index} />
-      </Switch>
-    </div>
-  </Router>,
+          <Route path="/" component={Index} />
+        </Switch>
+      </div>
+    </Router>
+  </Provider>,
   document.getElementById("root")
 );
 
