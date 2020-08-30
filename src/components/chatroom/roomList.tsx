@@ -11,6 +11,7 @@ const RoomList: React.FC<{}> = ({}) => {
     (state: RootState) => state.dashBoard
   );
 
+  const { keyword } = useSelector((state: RootState) => state.search);
   const obtainRoomList = async () => {
     const { data } = await axios.get(
       `${process.env.REACT_APP_API_URL}/user/getRoomInfo`,
@@ -23,10 +24,14 @@ const RoomList: React.FC<{}> = ({}) => {
   useEffect(() => {
     obtainRoomList();
   }, [refreshRoomList]);
-  //console.log(roomList);
+
+  const filterRoomList = roomList.filter(
+    ({ room_name }) => room_name.substring(0, keyword.length) === keyword
+  );
+
   return (
     <div className="flex-1 bg-white overflow-auto">
-      {roomList.map(({ room_name, room_owner, room_ownerId }, index) => {
+      {filterRoomList.map(({ room_name, room_owner, room_ownerId }, index) => {
         return (
           <ChatRoomCard
             name={room_name}

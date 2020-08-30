@@ -12,6 +12,8 @@ import {
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
+import { useDispatch } from "react-redux";
+import { setKeyword } from "../../redux/slice/searchSlice";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -50,6 +52,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Searchbar: React.FC<{ handleOpen: () => void }> = ({ handleOpen }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   return (
     <AppBar position="sticky" color="primary" className="h-20 py-2">
       <Toolbar className=" flex item-center">
@@ -62,6 +65,9 @@ const Searchbar: React.FC<{ handleOpen: () => void }> = ({ handleOpen }) => {
             classes={{
               root: classes.inputRoot,
               input: classes.inputInput,
+            }}
+            onChange={(event) => {
+              dispatch(setKeyword(event.target.value));
             }}
             inputProps={{ "aria-label": "search" }}
           />
