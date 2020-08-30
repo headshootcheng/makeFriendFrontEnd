@@ -37,7 +37,7 @@ const Index: React.FC<{}> = ({}) => {
             onClick={() => {
               setType("register");
             }}
-            variant={type == "register" ? "contained" : "outlined"}
+            variant={type === "register" ? "contained" : "outlined"}
           >
             Register
           </Button>
@@ -46,7 +46,7 @@ const Index: React.FC<{}> = ({}) => {
             onClick={() => {
               setType("login");
             }}
-            variant={type == "login" ? "contained" : "outlined"}
+            variant={type === "login" ? "contained" : "outlined"}
           >
             Login
           </Button>
