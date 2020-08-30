@@ -20,7 +20,7 @@ const AddChatRoomPopUp: React.FC<{
     (state: RootState) => state.userInfo
   );
   const createRoom = async () => {
-    console.log(userId);
+    console.log("userId  ", userId);
     const { data } = await axios.post(
       `${process.env.REACT_APP_API_URL}/user/createNewRoom`,
       {
