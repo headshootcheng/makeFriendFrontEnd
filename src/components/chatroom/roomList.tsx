@@ -26,8 +26,14 @@ const RoomList: React.FC<{}> = ({}) => {
   console.log(roomList);
   return (
     <div className="flex-1 bg-white overflow-auto">
-      {roomList.map(({ room_name, room_owner }, index) => {
-        return <ChatRoomCard name={room_name} owner={room_owner} />;
+      {roomList.map(({ room_name, room_owner, room_ownerId }, index) => {
+        return (
+          <ChatRoomCard
+            name={room_name}
+            owner={room_owner}
+            ownerId={room_ownerId}
+          />
+        );
       })}
     </div>
   );

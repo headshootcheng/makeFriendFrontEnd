@@ -1,22 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../styles/app.css";
 import GroupRounded from "@material-ui/icons/GroupRounded";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCurrentRoomInfo } from "../../redux/slice/roomSlice";
 import { openChatMode } from "../../redux/slice/dashboardSlice";
+import { RootState } from "../../redux";
+import DeleteChatRoomPopUp from "./deleteChatRoomPopUp";
 const ChatRoomCard: React.FC<{
   name: string;
   owner: string;
-}> = ({ name = "", owner = "" }) => {
+  ownerId: number;
+}> = ({ name = "", owner = "", ownerId }) => {
   const dispatch = useDispatch();
   const enterRoom = () => {
     dispatch(setCurrentRoomInfo({ name: name, owner: owner }));
     dispatch(openChatMode());
   };
-
+  const { userId } = useSelector((state: RootState) => state.userInfo);
+  const [deleteChatOpen, setDeleteChatOpen] = useState<boolean>(false);
   return (
     <div className="flex-none border-solid  border-b-2 border-gray-200 bg-white flex flex-col px-4 py-2">
       <div className="flex flex-row">
@@ -40,12 +44,19 @@ const ChatRoomCard: React.FC<{
         <span className=" mx-12 text-gray-600">Host: {owner}</span>
         <div className="flex-1" />
         <IconButton style={{ outline: "none" }}>
-          <DeleteIcon
-            style={{ height: 30, width: 30 }}
-            className=" text-gray-700"
-          />
+          {userId === ownerId ? (
+            <DeleteIcon
+              style={{ height: 30, width: 30 }}
+              className=" text-gray-700"
+              onClick={() => setDeleteChatOpen(true)}
+            />
+          ) : null}
         </IconButton>
       </div>
+      <DeleteChatRoomPopUp
+        open={deleteChatOpen}
+        handleClose={() => setDeleteChatOpen(false)}
+      />
     </div>
   );
 };

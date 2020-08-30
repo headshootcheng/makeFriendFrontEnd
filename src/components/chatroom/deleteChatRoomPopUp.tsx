@@ -10,24 +10,23 @@ import TextField from "@material-ui/core/TextField";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux";
 import { setRefresh } from "../../redux/slice/dashboardSlice";
-const AddChatRoomPopUp: React.FC<{
+const DeleteChatRoomPopUp: React.FC<{
   open: boolean;
   handleClose: () => void;
 }> = ({ open, handleClose }) => {
   const dispatch = useDispatch();
-  const [roomName, setRoomName] = useState<string>("");
   const { username, userId } = useSelector(
     (state: RootState) => state.userInfo
   );
-  const createRoom = async () => {
-    const { data } = await axios.post(
-      `${process.env.REACT_APP_API_URL}/user/createNewRoom`,
+
+  const deleteRoom = async () => {
+    const { data } = await axios.delete(
+      `${process.env.REACT_APP_API_URL}/user/deleteRoom`,
       {
-        roomName: roomName,
-        owner: username,
-        userId: userId,
-      },
-      {}
+        data: {
+          userId: userId,
+        },
+      }
     );
     handleClose();
     dispatch(setRefresh());
@@ -35,29 +34,20 @@ const AddChatRoomPopUp: React.FC<{
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>Create New Chatroom</DialogTitle>
+      <DialogTitle>Delete Chatroom</DialogTitle>
       <DialogContent>
-        <DialogContentText>
-          Please enter the name of new chatroom !!!
-        </DialogContentText>
-        <TextField
-          autoFocus
-          margin="dense"
-          label="Name"
-          onChange={(event) => setRoomName(event.target.value)}
-          fullWidth
-        />
+        <DialogContentText>Confirm to delete your room ?</DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary">
           Cancel
         </Button>
-        <Button onClick={createRoom} color="primary">
-          Submit
+        <Button color="primary" onClick={deleteRoom}>
+          Confirm
         </Button>
       </DialogActions>
     </Dialog>
   );
 };
 
-export default AddChatRoomPopUp;
+export default DeleteChatRoomPopUp;
