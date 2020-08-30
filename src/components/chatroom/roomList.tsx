@@ -16,14 +16,14 @@ const RoomList: React.FC<{}> = ({}) => {
       `${process.env.REACT_APP_API_URL}/user/getRoomInfo`,
       {}
     );
-    console.log(data);
+    //console.log(data);
     setRoomList(data.roomList);
   };
 
   useEffect(() => {
     obtainRoomList();
   }, [refreshRoomList]);
-  console.log(roomList);
+  //console.log(roomList);
   return (
     <div className="flex-1 bg-white overflow-auto">
       {roomList.map(({ room_name, room_owner, room_ownerId }, index) => {
