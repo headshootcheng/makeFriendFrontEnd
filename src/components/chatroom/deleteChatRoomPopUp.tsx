@@ -11,9 +11,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux";
 import { setRefresh } from "../../redux/slice/dashboardSlice";
 const DeleteChatRoomPopUp: React.FC<{
+  roomName: string;
   open: boolean;
   handleClose: () => void;
-}> = ({ open, handleClose }) => {
+}> = ({ roomName, open, handleClose }) => {
   const dispatch = useDispatch();
   const { username, userId } = useSelector(
     (state: RootState) => state.userInfo
@@ -25,6 +26,7 @@ const DeleteChatRoomPopUp: React.FC<{
       {
         data: {
           userId: userId,
+          roomName: roomName,
         },
       }
     );

@@ -54,6 +54,7 @@ const ChatRoomCard: React.FC<{
         </IconButton>
       </div>
       <DeleteChatRoomPopUp
+        roomName={name}
         open={deleteChatOpen}
         handleClose={() => setDeleteChatOpen(false)}
       />
