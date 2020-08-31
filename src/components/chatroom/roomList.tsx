@@ -12,6 +12,7 @@ const RoomList: React.FC<{}> = () => {
   );
 
   const { keyword } = useSelector((state: RootState) => state.search);
+
   const obtainRoomList = async () => {
     const { data } = await axios.get(
       `${process.env.REACT_APP_API_URL}/user/getRoomInfo`,
