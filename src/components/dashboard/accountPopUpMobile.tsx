@@ -5,7 +5,6 @@ import Menu from "@material-ui/core/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import LockIcon from "@material-ui/icons/Lock";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import CreditCardIcon from "@material-ui/icons/CreditCard";
 import { useHistory } from "react-router-dom";
 
 const AccountPopUpMobile: React.FC<{
@@ -14,10 +13,10 @@ const AccountPopUpMobile: React.FC<{
   isMobileMenuOpen: boolean;
   handleMobileMenuClose: () => void;
 }> = ({
-  mobileMoreAnchorEl,
-  mobileMenuId,
-  isMobileMenuOpen,
-  handleMobileMenuClose,
+  mobileMoreAnchorEl = "",
+  mobileMenuId = "",
+  isMobileMenuOpen = false,
+  handleMobileMenuClose = () => {},
 }) => {
   const history = useHistory();
 

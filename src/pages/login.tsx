@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Button } from "@material-ui/core";
 import InputRow from "../components/auth/InputRow";
 import axios from "axios";
@@ -8,13 +8,13 @@ import { useHistory } from "react-router-dom";
 import FacebookLogin from "react-facebook-login";
 import GoogleLogin from "react-google-login";
 
-const Login: React.FC<{}> = ({}) => {
+const Login: React.FC<{}> = () => {
   const history = useHistory();
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [msgType, setMsgType] = useState<number>(0);
   const [msgContent, setMsgContent] = useState<string>("");
-  const msgBox: React.FC<{}> = ({}) => {
+  const msgBox: React.FC<{}> = () => {
     switch (msgType) {
       case 0:
         return <div className="h-12" />;

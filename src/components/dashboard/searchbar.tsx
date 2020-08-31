@@ -50,7 +50,9 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const Searchbar: React.FC<{ handleOpen: () => void }> = ({ handleOpen }) => {
+const Searchbar: React.FC<{ handleOpen: () => void }> = ({
+  handleOpen = () => {},
+}) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   return (

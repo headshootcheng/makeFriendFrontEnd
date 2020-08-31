@@ -8,7 +8,12 @@ const AccountPopUp: React.FC<{
   menuId: string;
   isMenuOpen: boolean;
   handleMenuClose: () => void;
-}> = ({ anchorEl, menuId, isMenuOpen, handleMenuClose }) => {
+}> = ({
+  anchorEl = "",
+  menuId = "",
+  isMenuOpen = false,
+  handleMenuClose = () => {},
+}) => {
   const history = useHistory();
 
   const logOut = () => {

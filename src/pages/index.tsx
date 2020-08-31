@@ -1,11 +1,12 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import "../styles/app.css";
 import { ButtonGroup, Button, Link } from "@material-ui/core";
 import Register from "./register";
 import Login from "./login";
-const Index: React.FC<{}> = ({}) => {
+const Index: React.FC<{}> = () => {
   const [type, setType] = useState<string>("login");
-  const renderPage: React.FC<{}> = ({}) => {
+
+  const renderPage: React.FC<{}> = () => {
     switch (type) {
       case "register":
         return <Register />;
@@ -15,7 +16,7 @@ const Index: React.FC<{}> = ({}) => {
         return <Register />;
     }
   };
-  //console.log(process.env);
+
   return (
     <div className="h-screen grid grid-flow-col grid-cols-1 md:grid-cols-2  grid-rows-6">
       <div

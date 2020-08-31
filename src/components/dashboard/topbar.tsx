@@ -97,7 +97,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const Topbar: React.FC<{}> = ({}) => {
+const Topbar: React.FC<{}> = () => {
   const { username } = useSelector((state: RootState) => state.userInfo);
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);

@@ -3,7 +3,7 @@ import "../styles/app.css";
 import Topbar from "../components/dashboard/topbar";
 import Searchbar from "../components/dashboard/searchbar";
 import RoomList from "../components/chatroom/roomList";
-import Content from "../components/dashboard/content";
+import Welcome from "../components/dashboard/welcome";
 import Chatroom from "./chatroom";
 import AddChatRoomPopUp from "../components/chatroom/addChatRoomPopUp";
 import axios from "axios";
@@ -15,11 +15,12 @@ const Dashboard = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [addChatOpen, setAddChatOpen] = useState<boolean>(false);
-  //const [switchRoomPage, setSwitch] = useState<boolean>(false);
+
   const { chatMode } = useSelector((state: RootState) => state.dashBoard);
+
   useEffect(() => {
     getUserInfo();
-  }, []);
+  });
 
   const getUserInfo: () => void = () => {
     axios
@@ -51,7 +52,7 @@ const Dashboard = () => {
           handleClose={() => setAddChatOpen(false)}
         />
       </div>
-      {chatMode ? <Chatroom /> : <Content />}
+      {chatMode ? <Chatroom /> : <Welcome />}
     </div>
   );
 };

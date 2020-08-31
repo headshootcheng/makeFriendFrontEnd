@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -13,24 +13,27 @@ import { setRefresh } from "../../redux/slice/dashboardSlice";
 const AddChatRoomPopUp: React.FC<{
   open: boolean;
   handleClose: () => void;
-}> = ({ open, handleClose }) => {
+}> = ({ open = false, handleClose = () => {} }) => {
   const dispatch = useDispatch();
   const [roomName, setRoomName] = useState<string>("");
   const { username, userId } = useSelector(
     (state: RootState) => state.userInfo
   );
-  const createRoom = async () => {
-    const { data } = await axios.post(
-      `${process.env.REACT_APP_API_URL}/user/createNewRoom`,
-      {
-        roomName: roomName,
-        owner: username,
-        userId: userId,
-      },
-      {}
-    );
-    handleClose();
-    dispatch(setRefresh());
+  const createRoom = () => {
+    axios
+      .post(
+        `${process.env.REACT_APP_API_URL}/user/createNewRoom`,
+        {
+          roomName: roomName,
+          owner: username,
+          userId: userId,
+        },
+        {}
+      )
+      .then(() => {
+        handleClose();
+        dispatch(setRefresh());
+      });
   };
 
   return (

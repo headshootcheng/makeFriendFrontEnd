@@ -13,7 +13,7 @@ const ChatRoomCard: React.FC<{
   name: string;
   owner: string;
   ownerId: number;
-}> = ({ name = "", owner = "", ownerId }) => {
+}> = ({ name = "", owner = "", ownerId = 0 }) => {
   const dispatch = useDispatch();
   const enterRoom = () => {
     dispatch(setCurrentRoomInfo({ name: name, owner: owner }));

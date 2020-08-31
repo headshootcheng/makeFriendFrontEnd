@@ -4,7 +4,7 @@ import ChatRoomCard from "./chatRoomCard";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { RootState } from "../../redux";
-const RoomList: React.FC<{}> = ({}) => {
+const RoomList: React.FC<{}> = () => {
   const [roomList, setRoomList] = useState<any[]>([]);
 
   const { refreshRoomList } = useSelector(

@@ -12,7 +12,7 @@ const InputRow: React.FC<{
   placeholder = "",
   required = false,
   type = "",
-  onChange,
+  onChange = (event) => {},
 }) => {
   //console.log("renderInputRow");
   return (

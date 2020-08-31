@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/app.css";
 import Header from "../components/chatroom/header";
 import MessageBox from "../components/chatroom/messageBox";
-const Chatroom: React.FC<{}> = ({}) => {
+const Chatroom: React.FC<{}> = () => {
   return (
     <div className=" flex flex-1 flex-col">
       <Header />
