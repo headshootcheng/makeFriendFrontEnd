@@ -9,7 +9,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux";
-import { setRefresh } from "../../redux/slice/dashboardSlice";
+import { setRefreshRoomList } from "../../redux/slice/dashboardSlice";
 const AddChatRoomPopUp: React.FC<{
   open: boolean;
   handleClose: () => void;
@@ -32,7 +32,7 @@ const AddChatRoomPopUp: React.FC<{
       )
       .then(() => {
         handleClose();
-        dispatch(setRefresh());
+        dispatch(setRefreshRoomList());
       });
   };
 

@@ -13,7 +13,7 @@ const Index: React.FC<{}> = () => {
       case "login":
         return <Login />;
       default:
-        return <Register />;
+        return <Login />;
     }
   };
 

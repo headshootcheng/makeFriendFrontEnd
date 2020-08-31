@@ -7,7 +7,11 @@ type dashboardState = {
 
 const dashBoardSlice = createSlice({
   name: "dashboard",
-  initialState: { chatMode: false, refreshRoomList: false },
+  initialState: {
+    chatMode: false,
+    refreshRoomList: false,
+    refreshDashboard: false,
+  },
   reducers: {
     openChatMode(dashboard) {
       dashboard.chatMode = true;
@@ -15,7 +19,7 @@ const dashBoardSlice = createSlice({
     closeChatMode(dashboard) {
       dashboard.chatMode = false;
     },
-    setRefresh(dashboard) {
+    setRefreshRoomList(dashboard) {
       dashboard.refreshRoomList = !dashboard.refreshRoomList;
     },
   },
@@ -24,7 +28,7 @@ const dashBoardSlice = createSlice({
 export const {
   openChatMode,
   closeChatMode,
-  setRefresh,
+  setRefreshRoomList,
 } = dashBoardSlice.actions;
 
 export default dashBoardSlice.reducer;

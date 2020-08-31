@@ -1,25 +1,41 @@
 import React from "react";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
+import { useSelector } from "react-redux";
 import "../../styles/app.css";
-import IconButton from "@material-ui/core/IconButton";
-import SendIcon from "@material-ui/icons/Send";
-import InputBase from "@material-ui/core/InputBase";
-const MessageBox: React.FC<{}> = () => {
+import { RootState } from "../../redux";
+const MessageBox: React.FC<{
+  speakerName: string;
+  speakerId: number;
+  message: string;
+}> = ({ speakerName = "guest", message = "", speakerId = 0 }) => {
+  const { userId, username } = useSelector(
+    (state: RootState) => state.userInfo
+  );
+
+  const isSpeaker = speakerName === username;
+
   return (
-    <AppBar position="static" color="primary" className="h-24 py-4">
-      <Toolbar className=" flex item-center">
-        <InputBase
-          placeholder="Please enter your message"
-          className=" w-4/5 bg-white h-16 rounded-full px-6"
-        />
-        <div className=" flex-1" />
-        <IconButton style={{ outline: "none" }}>
-          <SendIcon className=" text-white" style={{ height: 40, width: 40 }} />
-        </IconButton>
-      </Toolbar>
-    </AppBar>
+    <div>
+      {isSpeaker ? (
+        <div className=" flex flex-row mx-4 my-8">
+          <div className="flex flex-col">
+            <div className="bg-blue-400  h-16 rounded-lg flex px-4 items-center justify-center flex-wrap  text-white">
+              <span>{message}</span>
+            </div>
+            <span className=" text-sm  text-right">{speakerName}</span>
+          </div>
+        </div>
+      ) : (
+        <div className=" flex flex-row mx-4 my-8">
+          <div className="flex-1" />
+          <div className="flex-col">
+            <div className=" bg-green-700 h-16 rounded-lg flex px-4 items-center justify-center flex-wrap  text-white">
+              <span>{message}</span>
+            </div>
+            <span className=" text-sm">{speakerName}</span>
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
-
 export default MessageBox;

@@ -10,17 +10,21 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserInfo } from "../redux/slice/userSlice";
+import { closeChatMode } from "../redux/slice/dashboardSlice";
 import { RootState } from "../redux";
 const Dashboard = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [addChatOpen, setAddChatOpen] = useState<boolean>(false);
 
-  const { chatMode } = useSelector((state: RootState) => state.dashBoard);
+  const { chatMode, refreshDashboard } = useSelector(
+    (state: RootState) => state.dashBoard
+  );
 
   useEffect(() => {
     getUserInfo();
-  });
+    dispatch(closeChatMode());
+  }, [refreshDashboard]);
 
   const getUserInfo: () => void = () => {
     axios
