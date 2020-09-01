@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import "../../styles/app.css";
@@ -11,8 +11,10 @@ import { closeChatMode } from "../../redux/slice/dashboardSlice";
 const Header: React.FC<{}> = () => {
   const dispatch = useDispatch();
   const { name, owner } = useSelector((state: RootState) => state.roomInfo);
+  const [ws, setWs] = useState<any>(io(`${process.env.REACT_APP_API_URL}`));
 
   const quitRoom = () => {
+    ws.close();
     dispatch(closeChatMode());
   };
 
