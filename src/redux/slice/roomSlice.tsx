@@ -34,7 +34,6 @@ const roomInfoSlice = createSlice({
     },
     updateMessageList(room, action: PayloadAction<message>) {
       //console.log(action.payload);
-      room.messageList.pop();
       room.messageList.push(action.payload);
     },
     clearMessageList(room) {

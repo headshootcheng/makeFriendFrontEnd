@@ -14,7 +14,7 @@ const Chatroom: React.FC<{}> = () => {
   );
   const dispatch = useDispatch();
   useEffect(() => {
-    //console.log("join", name);
+    console.log("join", name);
     ws.emit("join", { name, userId, username });
     dispatch(clearMessageList());
   }, [userId, name, username]);
