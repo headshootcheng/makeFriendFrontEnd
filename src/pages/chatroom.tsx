@@ -30,7 +30,7 @@ const Chatroom: React.FC<{}> = () => {
     console.log("Get Message");
     ws.on("message", (message: any) => {
       console.log("updateMessage", message);
-      messageList.push(message);
+      setMessageList([...messageList, message]);
     });
   }, [getMessage]);
 
