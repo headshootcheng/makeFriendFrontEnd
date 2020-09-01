@@ -12,10 +12,16 @@ import io from "socket.io-client";
 const Header: React.FC<{}> = () => {
   const dispatch = useDispatch();
   const { name, owner } = useSelector((state: RootState) => state.roomInfo);
+  const { userId } = useSelector((state: RootState) => state.userInfo);
   const [ws, setWs] = useState<any>(io(`${process.env.REACT_APP_API_URL}`));
 
   const quitRoom = () => {
-    ws.close();
+    ws.emit("quitRoom", { userId }, (msg: string) => {
+      if (msg === "success") {
+        console.log("close socket");
+        ws.close();
+      }
+    });
     dispatch(closeChatMode());
   };
 
