@@ -4,15 +4,15 @@ import "../styles/app.css";
 import Header from "../components/chatroom/header";
 import MessageContent from "../components/chatroom/messageContent";
 import InputField from "../components/chatroom/inputField";
-import io from "socket.io-client";
+//import io from "socket.io-client";
 // import { refreshMessage } from "../redux/slice/roomSlice";
 import { RootState } from "../redux";
 
 const Chatroom: React.FC<{}> = () => {
-  // const dispatch = useDispatch();
-  const [ws, setWs] = useState<any>(io(`${process.env.REACT_APP_API_URL}`));
+  //const dispatch = useDispatch();
+  //const [ws, setWs] = useState<any>(io(`${process.env.REACT_APP_API_URL}`));
   const [messageList, setMessageList] = useState<any[]>([]);
-  const { name } = useSelector((state: RootState) => state.roomInfo);
+  const { name, ws } = useSelector((state: RootState) => state.roomInfo);
   const { userId, username } = useSelector(
     (state: RootState) => state.userInfo
   );

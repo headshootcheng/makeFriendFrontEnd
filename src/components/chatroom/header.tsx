@@ -8,12 +8,12 @@ import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux";
 import { closeChatMode } from "../../redux/slice/dashboardSlice";
-import io from "socket.io-client";
+//import io from "socket.io-client";
 const Header: React.FC<{}> = () => {
   const dispatch = useDispatch();
-  const { name, owner } = useSelector((state: RootState) => state.roomInfo);
+  const { name, owner, ws } = useSelector((state: RootState) => state.roomInfo);
   const { userId } = useSelector((state: RootState) => state.userInfo);
-  const [ws, setWs] = useState<any>(io(`${process.env.REACT_APP_API_URL}`));
+  // const [ws, setWs] = useState<any>(io(`${process.env.REACT_APP_API_URL}`));
 
   const quitRoom = () => {
     ws.emit("quitRoom", { userId }, ({ msg }: any) => {

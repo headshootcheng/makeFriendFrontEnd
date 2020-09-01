@@ -5,7 +5,10 @@ import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentRoomInfo } from "../../redux/slice/roomSlice";
+import {
+  setCurrentRoomInfo,
+  connectToSocket,
+} from "../../redux/slice/roomSlice";
 import { openChatMode } from "../../redux/slice/dashboardSlice";
 import { RootState } from "../../redux";
 import DeleteChatRoomPopUp from "./deleteChatRoomPopUp";
@@ -17,6 +20,7 @@ const ChatRoomCard: React.FC<{
   const dispatch = useDispatch();
   const enterRoom = () => {
     dispatch(setCurrentRoomInfo({ name: name, owner: owner }));
+    dispatch(connectToSocket());
     dispatch(openChatMode());
   };
   const { userId } = useSelector((state: RootState) => state.userInfo);
