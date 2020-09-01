@@ -24,7 +24,7 @@ const Chatroom: React.FC<{}> = () => {
     // ws.on("message", (message: any) => {
     //   setMessageList([message]);
     // });
-  }, [userId, name, ws, username]);
+  }, [userId, name, username]);
 
   useEffect(() => {
     console.log("Get Message");
