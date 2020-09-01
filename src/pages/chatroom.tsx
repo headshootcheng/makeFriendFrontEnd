@@ -37,7 +37,7 @@ const Chatroom: React.FC<{}> = () => {
   const sendMessage = (text: string) => {
     console.log("send Message");
     ws.emit("sendMessage", text);
-    refreshMessage(!getMessage);
+    //refreshMessage(!getMessage);
   };
 
   return (
