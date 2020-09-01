@@ -1,29 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import "../styles/app.css";
 import Header from "../components/chatroom/header";
 import MessageContent from "../components/chatroom/messageContent";
 import InputField from "../components/chatroom/inputField";
 import { RootState } from "../redux";
-
+import { updateMessageList, clearMessageList } from "../redux/slice/roomSlice";
 const Chatroom: React.FC<{}> = () => {
-  const [messageList, setMessageList] = useState<any[]>([]);
+  //const [messageList, setMessageList] = useState<any[]>([]);
   const { name, ws } = useSelector((state: RootState) => state.roomInfo);
   const { userId, username } = useSelector(
     (state: RootState) => state.userInfo
   );
-
+  const dispatch = useDispatch();
   useEffect(() => {
     //console.log("join", name);
     ws.emit("join", { name, userId, username });
-    setMessageList([]);
+    dispatch(clearMessageList());
   }, [userId, name, username]);
 
   useEffect(() => {
     //console.log("Get Message");
     ws.on("message", (message: any) => {
       console.log("updateMessage", message);
-      setMessageList([...messageList, message]);
+      dispatch(updateMessageList(message));
     });
   }, [ws]);
 
@@ -36,7 +36,7 @@ const Chatroom: React.FC<{}> = () => {
   return (
     <div className=" flex flex-1 flex-col">
       <Header />
-      <MessageContent messageList={messageList} />
+      <MessageContent />
       <InputField sendMessage={sendMessage} />
     </div>
   );

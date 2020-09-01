@@ -6,6 +6,12 @@ type roomState = {
   owner: string;
 };
 
+type message = {
+  username: string;
+  userId: number;
+  text: string;
+};
+
 const roomInfoSlice = createSlice({
   name: "roomInfo",
   initialState: {
@@ -14,6 +20,7 @@ const roomInfoSlice = createSlice({
     refresh: false,
     getMessage: false,
     ws: Socket,
+    messageList: [{}],
   },
   reducers: {
     setCurrentRoomInfo(room, action: PayloadAction<roomState>) {
@@ -25,9 +32,22 @@ const roomInfoSlice = createSlice({
     connectToSocket(room) {
       room.ws = io(`${process.env.REACT_APP_API_URL}`);
     },
+    updateMessageList(room, action: PayloadAction<message>) {
+      //console.log(action.payload);
+      room.messageList.pop();
+      room.messageList.push(action.payload);
+    },
+    clearMessageList(room) {
+      room.messageList = [];
+    },
   },
 });
 
-export const { setCurrentRoomInfo, connectToSocket } = roomInfoSlice.actions;
+export const {
+  setCurrentRoomInfo,
+  connectToSocket,
+  updateMessageList,
+  clearMessageList,
+} = roomInfoSlice.actions;
 
 export default roomInfoSlice.reducer;
