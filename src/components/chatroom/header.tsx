@@ -8,6 +8,7 @@ import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux";
 import { closeChatMode } from "../../redux/slice/dashboardSlice";
+import { exitRoom } from "../../redux/slice/roomSlice";
 const Header: React.FC<{}> = () => {
   const dispatch = useDispatch();
   const { name, owner, ws } = useSelector((state: RootState) => state.roomInfo);
@@ -22,6 +23,7 @@ const Header: React.FC<{}> = () => {
       }
     });
     dispatch(closeChatMode());
+    dispatch(exitRoom());
   };
 
   return (

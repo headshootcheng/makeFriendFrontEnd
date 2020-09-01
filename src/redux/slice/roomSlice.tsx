@@ -39,6 +39,10 @@ const roomInfoSlice = createSlice({
     clearMessageList(room) {
       room.messageList = [];
     },
+    exitRoom(room) {
+      room.name = "";
+      room.owner = "";
+    },
   },
 });
 
@@ -47,6 +51,7 @@ export const {
   connectToSocket,
   updateMessageList,
   clearMessageList,
+  exitRoom,
 } = roomInfoSlice.actions;
 
 export default roomInfoSlice.reducer;
