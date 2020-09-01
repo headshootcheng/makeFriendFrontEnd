@@ -21,18 +21,24 @@ const ChatRoomCard: React.FC<{
   const dispatch = useDispatch();
   const { userId } = useSelector((state: RootState) => state.userInfo);
   const { ws } = useSelector((state: RootState) => state.roomInfo);
-
+  const { chatMode } = useSelector((state: RootState) => state.dashBoard);
   const enterRoom = () => {
-    ws.emit("quitRoom", { userId }, ({ msg }: any) => {
-      console.log("msg", msg);
-      if (msg === "success") {
-        console.log("close socket");
-        ws.close();
-      }
+    if (chatMode) {
+      ws.emit("quitRoom", { userId }, ({ msg }: any) => {
+        console.log("msg", msg);
+        if (msg === "success") {
+          console.log("close socket");
+          ws.close();
+        }
+        dispatch(setCurrentRoomInfo({ name: name, owner: owner }));
+        dispatch(connectToSocket());
+        dispatch(openChatMode());
+      });
+    } else {
       dispatch(setCurrentRoomInfo({ name: name, owner: owner }));
       dispatch(connectToSocket());
       dispatch(openChatMode());
-    });
+    }
   };
 
   const [deleteChatOpen, setDeleteChatOpen] = useState<boolean>(false);
