@@ -16,7 +16,8 @@ const Header: React.FC<{}> = () => {
   const [ws, setWs] = useState<any>(io(`${process.env.REACT_APP_API_URL}`));
 
   const quitRoom = () => {
-    ws.emit("quitRoom", { userId }, (msg: string) => {
+    ws.emit("quitRoom", { userId }, ({ msg }: any) => {
+      console.log("msg", msg);
       if (msg === "success") {
         console.log("close socket");
         ws.close();
