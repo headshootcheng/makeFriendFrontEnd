@@ -21,9 +21,9 @@ const Header: React.FC<{}> = () => {
         console.log("close socket");
         ws.close();
       }
+      dispatch(exitRoom());
+      dispatch(closeChatMode());
     });
-    dispatch(closeChatMode());
-    dispatch(exitRoom());
   };
 
   return (
