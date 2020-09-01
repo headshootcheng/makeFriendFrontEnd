@@ -12,8 +12,7 @@ const Chatroom: React.FC<{}> = () => {
   // const dispatch = useDispatch();
   const [ws, setWs] = useState<any>(io(`${process.env.REACT_APP_API_URL}`));
   const [messageList, setMessageList] = useState<any[]>([]);
-  const [getMessage, refreshMessage] = useState<boolean>(false);
-  const { name, refresh } = useSelector((state: RootState) => state.roomInfo);
+  const { name } = useSelector((state: RootState) => state.roomInfo);
   const { userId, username } = useSelector(
     (state: RootState) => state.userInfo
   );
@@ -24,7 +23,7 @@ const Chatroom: React.FC<{}> = () => {
     // ws.on("message", (message: any) => {
     //   setMessageList([message]);
     // });
-  }, [refresh]);
+  }, [userId, name, ws, username]);
 
   useEffect(() => {
     console.log("Get Message");

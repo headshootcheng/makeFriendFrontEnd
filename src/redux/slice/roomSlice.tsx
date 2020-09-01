@@ -19,13 +19,7 @@ const roomInfoSlice = createSlice({
       const { name, owner } = action.payload;
       room.name = name;
       room.owner = owner;
-      room.refresh = !room.refresh;
-      //room.getMessage = !room.getMessage;
-      //return room;
     },
-    // refreshMessage(room) {
-    //   room.getMessage = !room.getMessage;
-    // },
   },
 });
 
