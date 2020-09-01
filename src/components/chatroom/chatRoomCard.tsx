@@ -14,13 +14,13 @@ import { RootState } from "../../redux";
 import DeleteChatRoomPopUp from "./deleteChatRoomPopUp";
 
 const ChatRoomCard: React.FC<{
-  name: string;
+  room_name: string;
   owner: string;
   ownerId: number;
-}> = ({ name = "", owner = "", ownerId = 0 }) => {
+}> = ({ room_name = "", owner = "", ownerId = 0 }) => {
   const dispatch = useDispatch();
   const { userId } = useSelector((state: RootState) => state.userInfo);
-  const { ws } = useSelector((state: RootState) => state.roomInfo);
+  const { ws, name } = useSelector((state: RootState) => state.roomInfo);
   const { chatMode } = useSelector((state: RootState) => state.dashBoard);
   const enterRoom = () => {
     if (chatMode) {
@@ -33,18 +33,20 @@ const ChatRoomCard: React.FC<{
       dispatch(openChatMode());
     }
   };
-
+  const aleadyInRoom = name === room_name;
   const [deleteChatOpen, setDeleteChatOpen] = useState<boolean>(false);
   return (
     <div className="flex-none border-solid  border-b-2 border-gray-200 bg-white flex flex-col px-4 py-2">
       <div className="flex flex-row">
         <div className="flex-1" />
-        <IconButton style={{ outline: "none" }} onClick={enterRoom}>
-          <MeetingRoomIcon
-            style={{ height: 30, width: 30 }}
-            className=" text-gray-700"
-          />
-        </IconButton>
+        {aleadyInRoom ? null : (
+          <IconButton style={{ outline: "none" }} onClick={enterRoom}>
+            <MeetingRoomIcon
+              style={{ height: 30, width: 30 }}
+              className=" text-gray-700"
+            />
+          </IconButton>
+        )}
       </div>
       <div className="flex flex-row ">
         <GroupRounded

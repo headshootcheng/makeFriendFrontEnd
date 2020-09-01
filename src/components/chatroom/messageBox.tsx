@@ -7,11 +7,9 @@ const MessageBox: React.FC<{
   speakerId: number;
   message: string;
 }> = ({ speakerName = "guest", message = "", speakerId = 0 }) => {
-  const { userId, username } = useSelector(
-    (state: RootState) => state.userInfo
-  );
+  const { userId } = useSelector((state: RootState) => state.userInfo);
 
-  const isSpeaker = speakerName === username;
+  const isSpeaker = userId === speakerId;
 
   return (
     <div>

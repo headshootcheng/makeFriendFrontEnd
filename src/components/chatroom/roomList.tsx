@@ -35,7 +35,7 @@ const RoomList: React.FC<{}> = () => {
       {filterRoomList.map(({ room_name, room_owner, room_ownerId }, index) => {
         return (
           <ChatRoomCard
-            name={room_name}
+            room_name={room_name}
             owner={room_owner}
             ownerId={room_ownerId}
           />
