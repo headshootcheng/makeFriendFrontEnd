@@ -14,15 +14,15 @@ const Chatroom: React.FC<{}> = () => {
   );
 
   useEffect(() => {
-    console.log("join", name);
+    //console.log("join", name);
     ws.emit("join", { name, userId, username });
     setMessageList([]);
   }, [userId, name, username]);
 
   useEffect(() => {
-    console.log("Get Message");
+    //console.log("Get Message");
     ws.on("message", (message: any) => {
-      console.log("updateMessage", message);
+      //console.log("updateMessage", message);
       setMessageList([...messageList, message]);
     });
   });
