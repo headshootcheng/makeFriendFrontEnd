@@ -24,16 +24,9 @@ const ChatRoomCard: React.FC<{
   const { chatMode } = useSelector((state: RootState) => state.dashBoard);
   const enterRoom = () => {
     if (chatMode) {
-      ws.emit("quitRoom", { userId }, ({ msg }: any) => {
-        console.log("msg", msg);
-        if (msg === "success") {
-          console.log("close socket");
-          ws.close();
-        }
-        dispatch(setCurrentRoomInfo({ name: name, owner: owner }));
-        dispatch(connectToSocket());
-        dispatch(openChatMode());
-      });
+      ws.emit("quitRoom", { userId });
+      dispatch(setCurrentRoomInfo({ name: name, owner: owner }));
+      dispatch(openChatMode());
     } else {
       dispatch(setCurrentRoomInfo({ name: name, owner: owner }));
       dispatch(connectToSocket());
