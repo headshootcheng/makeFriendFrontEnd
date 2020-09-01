@@ -28,7 +28,7 @@ const ChatRoomCard: React.FC<{
         dispatch(setCurrentRoomInfo({ name: name, owner: owner }));
       });
     } else {
-      dispatch(setCurrentRoomInfo({ name: name, owner: owner }));
+      dispatch(setCurrentRoomInfo({ name: room_name, owner: owner }));
       dispatch(connectToSocket());
       dispatch(openChatMode());
     }
@@ -53,7 +53,7 @@ const ChatRoomCard: React.FC<{
           style={{ height: 40, width: 40 }}
           className="bg-black text-white rounded-full p-2"
         />
-        <span className="text-2xl mx-2">{name}</span>
+        <span className="text-2xl mx-2">{room_name}</span>
         <div className="flex-1" />
       </div>
       <div className="flex flex-row">
