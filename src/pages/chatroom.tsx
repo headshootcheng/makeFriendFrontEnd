@@ -21,9 +21,9 @@ const Chatroom: React.FC<{}> = () => {
   useEffect(() => {
     ws.emit("join", { name, userId, username });
     console.log("join");
-    ws.on("message", (message: any) => {
-      setMessageList([message]);
-    });
+    // ws.on("message", (message: any) => {
+    //   setMessageList([message]);
+    // });
   }, [refresh]);
 
   useEffect(() => {
