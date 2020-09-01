@@ -32,7 +32,7 @@ const Chatroom: React.FC<{}> = () => {
       console.log("updateMessage", message);
       setMessageList([...messageList, message]);
     });
-  });
+  }, []);
 
   const sendMessage = (text: string) => {
     console.log("send Message");
