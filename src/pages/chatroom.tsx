@@ -22,10 +22,10 @@ const Chatroom: React.FC<{}> = () => {
   useEffect(() => {
     //console.log("Get Message");
     ws.on("message", (message: any) => {
-      //console.log("updateMessage", message);
+      console.log("updateMessage", message);
       setMessageList([...messageList, message]);
     });
-  });
+  }, [ws]);
 
   const sendMessage = (text: string) => {
     console.log("send Message");
