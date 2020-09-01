@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import "../../styles/app.css";
@@ -8,12 +8,10 @@ import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux";
 import { closeChatMode } from "../../redux/slice/dashboardSlice";
-//import io from "socket.io-client";
 const Header: React.FC<{}> = () => {
   const dispatch = useDispatch();
   const { name, owner, ws } = useSelector((state: RootState) => state.roomInfo);
   const { userId } = useSelector((state: RootState) => state.userInfo);
-  // const [ws, setWs] = useState<any>(io(`${process.env.REACT_APP_API_URL}`));
 
   const quitRoom = () => {
     ws.emit("quitRoom", { userId }, ({ msg }: any) => {

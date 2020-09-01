@@ -12,18 +12,29 @@ import {
 import { openChatMode } from "../../redux/slice/dashboardSlice";
 import { RootState } from "../../redux";
 import DeleteChatRoomPopUp from "./deleteChatRoomPopUp";
+
 const ChatRoomCard: React.FC<{
   name: string;
   owner: string;
   ownerId: number;
 }> = ({ name = "", owner = "", ownerId = 0 }) => {
   const dispatch = useDispatch();
-  const enterRoom = () => {
-    dispatch(setCurrentRoomInfo({ name: name, owner: owner }));
-    dispatch(connectToSocket());
-    dispatch(openChatMode());
-  };
   const { userId } = useSelector((state: RootState) => state.userInfo);
+  const { ws } = useSelector((state: RootState) => state.roomInfo);
+
+  const enterRoom = () => {
+    ws.emit("quitRoom", { userId }, ({ msg }: any) => {
+      console.log("msg", msg);
+      if (msg === "success") {
+        console.log("close socket");
+        ws.close();
+      }
+      dispatch(setCurrentRoomInfo({ name: name, owner: owner }));
+      dispatch(connectToSocket());
+      dispatch(openChatMode());
+    });
+  };
+
   const [deleteChatOpen, setDeleteChatOpen] = useState<boolean>(false);
   return (
     <div className="flex-none border-solid  border-b-2 border-gray-200 bg-white flex flex-col px-4 py-2">
