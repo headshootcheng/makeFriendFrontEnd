@@ -25,7 +25,7 @@ const ChatRoomCard: React.FC<{
   const enterRoom = () => {
     if (chatMode) {
       ws.emit("quitRoom", { userId }, ({ msg }: any) => {
-        dispatch(setCurrentRoomInfo({ name: name, owner: owner }));
+        dispatch(setCurrentRoomInfo({ name: room_name, owner: owner }));
       });
     } else {
       dispatch(setCurrentRoomInfo({ name: room_name, owner: owner }));
@@ -70,7 +70,7 @@ const ChatRoomCard: React.FC<{
         </IconButton>
       </div>
       <DeleteChatRoomPopUp
-        roomName={name}
+        roomName={room_name}
         open={deleteChatOpen}
         handleClose={() => setDeleteChatOpen(false)}
       />
