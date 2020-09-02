@@ -28,7 +28,7 @@ const Header: React.FC<{}> = () => {
     });
   };
   console.log("userList", userList);
-  {
+
   //   userList.map(({ username = "" }: any) => {
   //     //return <span className="mx-2 text-gray-500">{username}</span>;
   //     console.log("username", username);
