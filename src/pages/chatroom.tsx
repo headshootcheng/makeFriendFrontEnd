@@ -31,7 +31,7 @@ const Chatroom: React.FC<{}> = () => {
       console.log("updateMessage", message);
       dispatch(updateMessageList(message));
     });
-    ws.on("room_info", (userList: any[]) => {
+    ws.on("room_info", ({ userList }: any) => {
       console.log("updateUserList", userList);
       dispatch(updateUserList(userList));
     });
