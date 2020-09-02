@@ -24,19 +24,24 @@ const AccountPopUp: React.FC<{
   const { userId } = useSelector((state: RootState) => state.userInfo);
 
   const logOut = () => {
-    ws.emit("quitRoom", { userId }, ({ msg }: any) => {
-      //console.log("msg", msg);
-      if (msg === "success") {
-        console.log("close socket");
-        ws.close();
-      }
-      if (chatMode) {
-        dispatch(exitRoom());
-        dispatch(closeChatMode());
-      }
+    if (chatMode) {
+      ws.emit("quitRoom", { userId }, ({ msg }: any) => {
+        //console.log("msg", msg);
+        if (msg === "success") {
+          console.log("close socket");
+          ws.close();
+        }
+        if (chatMode) {
+          dispatch(exitRoom());
+          dispatch(closeChatMode());
+        }
+        localStorage.removeItem("auth");
+        history.push("/");
+      });
+    } else {
       localStorage.removeItem("auth");
       history.push("/");
-    });
+    }
   };
 
   return (
