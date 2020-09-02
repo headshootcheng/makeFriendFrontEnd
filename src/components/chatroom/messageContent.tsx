@@ -10,13 +10,9 @@ const MessageContent: React.FC<{}> = () => {
   );
   return (
     <div className="flex-1 bg-yellow-800 overflow-auto">
-      {userList.map(({ username, userId, text }: any) => {
+      {userList.map(({ username, userId }: any) => {
         return (
-          <MessageBox
-            speakerName={username}
-            speakerId={userId}
-            message={text}
-          />
+          <MessageBox speakerName={username} speakerId={userId} message="" />
         );
       })}
     </div>
