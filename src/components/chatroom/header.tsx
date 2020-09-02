@@ -27,7 +27,7 @@ const Header: React.FC<{}> = () => {
       dispatch(closeChatMode());
     });
   };
-
+  console.log("userList", userList);
   return (
     <AppBar position="static" color="default" className="h-24 py-4">
       <Toolbar className=" flex item-center">
