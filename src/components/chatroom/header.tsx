@@ -46,9 +46,12 @@ const Header: React.FC<{}> = () => {
           <span className="text-2xl mx-2">{name}</span>
           <div className=" flex flex-row">
             <span className="mx-2 text-gray-500">Users: </span>
-            {userList.map(({ username }: any, index) => {
-              return <span className="mx-2 text-gray-500">{username} </span>;
-            })}
+            {userList ||
+              [].map(({ username }: any, index) => {
+                return (
+                  <span className="mx-2 text-gray-500">{username || ""} </span>
+                );
+              })}
           </div>
         </div>
       </Toolbar>
