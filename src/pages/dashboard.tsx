@@ -24,7 +24,9 @@ const Dashboard = () => {
   const { userId } = useSelector((state: RootState) => state.userInfo);
 
   useEffect(() => {
-    ws.emit("refreshDashboard", { userId });
+    if (chatMode) {
+      ws.emit("refreshDashboard", { userId });
+    }
     getUserInfo();
     dispatch(closeChatMode());
   }, [refreshDashboard]);
