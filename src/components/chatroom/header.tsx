@@ -28,6 +28,12 @@ const Header: React.FC<{}> = () => {
     });
   };
   console.log("userList", userList);
+  {
+    userList.map(({ username = "" }: any) => {
+      //return <span className="mx-2 text-gray-500">{username}</span>;
+      console.log("username", username);
+    });
+  }
   return (
     <AppBar position="static" color="default" className="h-24 py-4">
       <Toolbar className=" flex item-center">
@@ -46,9 +52,6 @@ const Header: React.FC<{}> = () => {
           <span className="text-2xl mx-2">{name}</span>
           <div className=" flex flex-row">
             <span className="mx-2 text-gray-500">Users: </span>
-            {userList.map(({ username = "" }: any) => {
-              return <span className="mx-2 text-gray-500">{username}</span>;
-            })}
           </div>
         </div>
       </Toolbar>
