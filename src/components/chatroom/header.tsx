@@ -11,7 +11,9 @@ import { closeChatMode } from "../../redux/slice/dashboardSlice";
 import { exitRoom } from "../../redux/slice/roomSlice";
 const Header: React.FC<{}> = () => {
   const dispatch = useDispatch();
-  const { name, owner, ws } = useSelector((state: RootState) => state.roomInfo);
+  const { name, owner, ws, userList } = useSelector(
+    (state: RootState) => state.roomInfo
+  );
   const { userId } = useSelector((state: RootState) => state.userInfo);
 
   const quitRoom = () => {
@@ -42,7 +44,12 @@ const Header: React.FC<{}> = () => {
         />
         <div className=" flex flex-col">
           <span className="text-2xl mx-2">{name}</span>
-          <span className="mx-2 text-gray-500">Host By: {owner}</span>
+          <span className="mx-2 text-gray-500">
+            Users:
+            {userList.map(({ username }: any, index) => {
+              return username;
+            })}
+          </span>
         </div>
       </Toolbar>
     </AppBar>

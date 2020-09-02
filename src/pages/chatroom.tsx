@@ -5,7 +5,11 @@ import Header from "../components/chatroom/header";
 import MessageContent from "../components/chatroom/messageContent";
 import InputField from "../components/chatroom/inputField";
 import { RootState } from "../redux";
-import { updateMessageList, clearMessageList } from "../redux/slice/roomSlice";
+import {
+  updateMessageList,
+  clearMessageList,
+  updateUserList,
+} from "../redux/slice/roomSlice";
 const Chatroom: React.FC<{}> = () => {
   //const [messageList, setMessageList] = useState<any[]>([]);
   const { name, ws } = useSelector((state: RootState) => state.roomInfo);
@@ -24,6 +28,10 @@ const Chatroom: React.FC<{}> = () => {
     ws.on("message", (message: any) => {
       console.log("updateMessage", message);
       dispatch(updateMessageList(message));
+    });
+    ws.on("room_info", (userList: any[]) => {
+      console.log("updateUserList", userList);
+      dispatch(updateUserList(userList));
     });
   }, [ws]);
 

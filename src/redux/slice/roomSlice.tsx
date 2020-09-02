@@ -12,6 +12,13 @@ type message = {
   text: string;
 };
 
+type userInfo = {
+  userId: number;
+  username: string;
+  room_name: string;
+  id: string;
+};
+
 const roomInfoSlice = createSlice({
   name: "roomInfo",
   initialState: {
@@ -21,6 +28,7 @@ const roomInfoSlice = createSlice({
     getMessage: false,
     ws: Socket,
     messageList: [{}],
+    userList: [{}],
   },
   reducers: {
     setCurrentRoomInfo(room, action: PayloadAction<roomState>) {
@@ -43,6 +51,12 @@ const roomInfoSlice = createSlice({
       room.name = "";
       room.owner = "";
     },
+    updateUserList(room, action: PayloadAction<userInfo[]>) {
+      room.userList = action.payload;
+    },
+    clearUserList(room) {
+      room.userList = [];
+    },
   },
 });
 
@@ -52,6 +66,8 @@ export const {
   updateMessageList,
   clearMessageList,
   exitRoom,
+  updateUserList,
+  clearUserList,
 } = roomInfoSlice.actions;
 
 export default roomInfoSlice.reducer;
