@@ -6,7 +6,10 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import LockIcon from "@material-ui/icons/Lock";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { useHistory } from "react-router-dom";
-
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux";
+import { exitRoom } from "../../redux/slice/roomSlice";
+import { closeChatMode } from "../../redux/slice/dashboardSlice";
 const AccountPopUpMobile: React.FC<{
   mobileMoreAnchorEl: any;
   mobileMenuId: string;
@@ -18,12 +21,28 @@ const AccountPopUpMobile: React.FC<{
   isMobileMenuOpen = false,
   handleMobileMenuClose = () => {},
 }) => {
+  const dispatch = useDispatch();
   const history = useHistory();
+  const { chatMode } = useSelector((state: RootState) => state.dashBoard);
+  const { ws } = useSelector((state: RootState) => state.roomInfo);
+  const { userId } = useSelector((state: RootState) => state.userInfo);
 
   const logOut = () => {
-    localStorage.removeItem("auth");
-    history.push("/");
+    ws.emit("quitRoom", { userId }, ({ msg }: any) => {
+      console.log("msg", msg);
+      if (msg === "success") {
+        console.log("close socket");
+        ws.close();
+      }
+      if (chatMode) {
+        dispatch(exitRoom());
+        dispatch(closeChatMode());
+      }
+      localStorage.removeItem("auth");
+      history.push("/");
+    });
   };
+
   return (
     <Menu
       anchorEl={mobileMoreAnchorEl}
