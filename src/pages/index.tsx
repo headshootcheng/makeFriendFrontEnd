@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/app.css";
 import { ButtonGroup, Button, Link } from "@material-ui/core";
 import Register from "./register";
 import Login from "./login";
+import { useHistory } from "react-router-dom";
 const Index: React.FC<{}> = () => {
+  const history = useHistory();
   const [type, setType] = useState<string>("login");
 
   const renderPage: React.FC<{}> = () => {
@@ -16,6 +18,12 @@ const Index: React.FC<{}> = () => {
         return <Login />;
     }
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("auth")) {
+      history.push("/dashboard");
+    }
+  }, []);
 
   return (
     <div className="h-screen grid grid-flow-col grid-cols-1 md:grid-cols-2  grid-rows-6">

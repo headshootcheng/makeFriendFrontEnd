@@ -11,14 +11,13 @@ import { closeChatMode } from "../../redux/slice/dashboardSlice";
 import { exitRoom } from "../../redux/slice/roomSlice";
 const Header: React.FC<{}> = () => {
   const dispatch = useDispatch();
-  const { name, owner, ws, userList } = useSelector(
+  const { name, ws, userList } = useSelector(
     (state: RootState) => state.roomInfo
   );
   const { userId } = useSelector((state: RootState) => state.userInfo);
 
   const quitRoom = () => {
     ws.emit("quitRoom", { userId }, ({ msg }: any) => {
-      console.log("msg", msg);
       if (msg === "success") {
         console.log("close socket");
         ws.close();
@@ -27,8 +26,6 @@ const Header: React.FC<{}> = () => {
       dispatch(closeChatMode());
     });
   };
-  console.log("userList", userList);
-
   return (
     <AppBar position="static" color="default" className="h-24 py-4">
       <Toolbar className=" flex item-center">
@@ -48,7 +45,7 @@ const Header: React.FC<{}> = () => {
           <div className=" flex flex-row">
             <span className="mx-2 text-gray-500">Users: </span>
             {userList.map(({ username = "" }: any) => {
-              return <span className="mx-2 text-gray-500">{username}</span>;
+              return <span className="mx-1 text-gray-500">{username}</span>;
             })}
           </div>
         </div>
