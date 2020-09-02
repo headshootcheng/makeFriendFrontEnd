@@ -25,6 +25,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (chatMode) {
+      console.log("test");
       ws.emit("refreshDashboard", { userId });
     }
     getUserInfo();
