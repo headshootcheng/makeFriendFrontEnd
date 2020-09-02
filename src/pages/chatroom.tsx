@@ -9,6 +9,7 @@ import {
   updateMessageList,
   clearMessageList,
   updateUserList,
+  clearUserList,
 } from "../redux/slice/roomSlice";
 const Chatroom: React.FC<{}> = () => {
   //const [messageList, setMessageList] = useState<any[]>([]);
@@ -21,6 +22,7 @@ const Chatroom: React.FC<{}> = () => {
     console.log("join", name);
     ws.emit("join", { name, userId, username });
     dispatch(clearMessageList());
+    dispatch(clearUserList());
   }, [userId, name, username]);
 
   useEffect(() => {

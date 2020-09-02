@@ -28,7 +28,7 @@ const roomInfoSlice = createSlice({
     getMessage: false,
     ws: Socket,
     messageList: [{}],
-    userList: [{ username: "Guest" }],
+    userList: [{}],
   },
   reducers: {
     setCurrentRoomInfo(room, action: PayloadAction<roomState>) {
