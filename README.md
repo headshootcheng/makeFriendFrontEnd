@@ -1,4 +1,4 @@
-# FriendChat
+# FriendChat - FrontEnd
 
 ## Setup
 - Install node_modules
